@@ -19,3 +19,26 @@
 
 # What was the highest yardage game so far this season?
 # Hint: Read in the dataset titled `huskies_2016.csv` and save it as a variable
+
+
+husky.games.2015 <- read.csv("data\\huskies_2015.csv")
+husky.games.2016 <- read.csv("data\\huskies_2016.csv")
+
+not.huskies <- as.vector(husky.games.2015$opponent)
+
+husky.scores <- as.vector(husky.games.2015$uw_score)
+
+rushing.yards <- sum(husky.games.2015$rushing_yards)
+
+passing.yards <- sum(husky.games.2015$passing_yards)
+
+combined.yards <- rushing.yards + passing.yards
+
+MostYardsScore <- function(games) {
+  tmp <- games$rushing_yards + games$passing_yards
+  return(paste("UW vs ", games[which.max(tmp),]$opponent, " scored ",
+         games[which.max(tmp),]$uw_score, " points ", " on ", games[which.max(tmp),]$date))
+}
+
+top.2015 <- MostYardsScore(husky.games.2015)
+top.2016 <- MostYardsScore(husky.games.2016)
